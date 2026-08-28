@@ -1,4 +1,4 @@
-![Portfolio banner](./public/portfolio-cover.webp)
+![Portfolio banner]()
 
 # Personal Portfolio
 
