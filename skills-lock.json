@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "skills": {
+    "animate-text": {
+      "source": "pixel-point/animate-text",
+      "sourceType": "github",
+      "skillPath": "skills/animate-text/SKILL.md",
+      "computedHash": "81b7719e45013fcf651f1f4c9a1ca2af9618e99667ff5cd3e5d102369235ec5e"
+    },
+    "fixing-motion-performance": {
+      "source": "ibelick/ui-skills",
+      "sourceType": "github",
+      "skillPath": "skills/fixing-motion-performance/SKILL.md",
+      "computedHash": "c1aca76fe18e8594f401cf78e5e76be24f182ce63167a398bdd4458f2a07639f"
+    },
+    "humanize": {
+      "source": "humanizerai/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/humanize/SKILL.md",
+      "computedHash": "0c272016e5734530bf8604533aee2f293444c5d3b3e83eb234b1d65534159160"
+    },
+    "nextjs-performance": {
+      "source": "giuseppe-trisciuoglio/developer-kit",
+      "sourceType": "github",
+      "skillPath": "plugins/developer-kit-typescript/skills/nextjs-performance/SKILL.md",
+      "computedHash": "e7aacb7a0f57077fd7494a5c3b633cbc6a351463142acb1101a7f85570e20ace"
+    },
+    "performance": {
+      "source": "addyosmani/web-quality-skills",
+      "sourceType": "github",
+      "skillPath": "skills/performance/SKILL.md",
+      "computedHash": "646931a3af896ae12a3cad3d762668cb6487fe3ab179daf8fdc974fb79acfe49"
+    },
+    "review-animations": {
+      "source": "emilkowalski/skill",
+      "sourceType": "github",
+      "skillPath": "skills/review-animations/SKILL.md",
+      "computedHash": "57c681344448379fbec8c11b45e355b70799998427240662318d017f292571bd"
+    },
+    "seo-audit": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/seo-audit/SKILL.md",
+      "computedHash": "606da61224d9d5687020816292c88152a7fcb27ce375b22f92f429e074f07f34"
+    }
+  }
+}

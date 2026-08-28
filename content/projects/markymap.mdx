@@ -1,0 +1,100 @@
+---
+title: Markymap
+slug: markymap
+description: >-
+  A local-first Markdown mindmap editor with live preview, browser-based
+  persistence, and import/export workflows.
+summary: Turn Markdown into visual mind maps, then edit, preview, and export your work.
+liveHref: "https://markymap.vercel.app/"
+sourceHref: "https://github.com/mohamedgshoaib/markymap"
+order: 5
+featured: true
+status: published
+stack:
+  - Next.js
+  - React
+  - TypeScript
+  - Tailwind CSS
+  - Coss UI
+  - Base UI
+  - Markmap
+  - Hugeicons
+  - Web Audio API
+  - Oxlint
+  - Oxfmt
+  - Vitest
+publishedAt: "2026-06-15"
+---
+
+<ProjectMediaPlaceholder />
+
+Markymap turns Markdown into interactive mindmaps in the browser. Write or import structured notes, see the map update as you work, and export the result when it is ready.
+
+It is a local-first application for visual thinking, outlining, planning, and Markdown-based authoring. The public homepage includes a live preview, while the playground provides the full editing workflow.
+
+## At a glance
+
+- **Core job:** Turn Markdown into a zoomable, pannable mindmap
+- **Surfaces:** Live homepage preview and full playground editor
+- **Persistence:** Browser-based, with content and preferences stored locally
+- **Status:** Production
+- **Planned work:** AI assistant integration is not yet included
+
+## The challenge
+
+Most visual note tools make someone manage the tool before they can think. Markymap needed to stay closer to writing: type Markdown, see the structure, and keep moving without an account or a heavy setup step.
+
+The challenge was to make the visual map feel like a direct extension of the document, while keeping import, export, view controls, and persistence useful without turning the editor into a complicated workspace.
+
+## My role
+
+I handled:
+
+- Markdown authoring, preview, and interactive mindmap views
+- Browser persistence for content, preferences, map options, and fold state
+- Import and export workflows for documents and project bundles
+- View controls for navigation, branch folding, and map configuration
+- A live homepage demonstration and a full playground for deeper work
+
+## What I built
+
+### Write, see, and navigate
+
+- Markdown editing with a zoomable, pannable SVG mindmap that updates as the document changes
+- A switch between the mindmap and rendered Markdown preview
+- Branch collapse and expansion, view fit and reset, and configurable map behavior
+- A live homepage demo that works without opening the editor
+
+### Keep work local
+
+- `localStorage` persistence for editor content, view preferences, map options, and fold state
+- Markdown-file and Markymap JSON-project imports
+
+### Export and personalise
+
+- Markdown, JSON project bundle, map HTML, and Markdown PDF exports
+- Light and dark themes with optional interaction sounds
+
+## How it works
+
+Markymap uses `markmap-lib` to transform Markdown into a node tree and `markmap-view` to render that tree as an interactive SVG. The playground keeps editing state in the browser, updates the map as Markdown changes, and preserves relevant preferences between sessions.
+
+Exports use dedicated server routes. The map HTML export preserves the map and its configured options, while Markdown PDF export renders the formatted document for printing.
+
+## Outcome
+
+Markymap keeps Markdown as the source of truth from editing through export. A document can move between text and map views, then leave the app as Markdown, a project bundle, an HTML map, or a PDF.
+
+The core workflows are implemented and actively maintained. AI assistance remains planned work, not a shipped capability.
+
+## Technology
+
+- **Application:** Next.js 16 App Router, React 19, TypeScript, and Tailwind CSS 4
+- **UI:** Coss UI components on Base UI, plus Hugeicons
+- **Mapping:** `markmap-lib` and `markmap-view`
+- **Interaction:** Web Audio API for optional sounds
+- **Quality:** Oxlint, Oxfmt, and Vitest
+
+## Stack
+
+<ProjectStack />

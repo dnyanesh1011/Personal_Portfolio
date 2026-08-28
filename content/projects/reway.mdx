@@ -1,0 +1,115 @@
+---
+title: Reway
+slug: reway
+description: >-
+  A private bookmark operating system with a cross-device web library and
+  Chrome extension for fast capture and retrieval.
+summary: A private bookmark library built for fast capture and reliable retrieval.
+liveHref: "https://www.reway.page/"
+sourceHref: "https://github.com/mohamedgshoaib/reway"
+order: 3
+featured: true
+status: published
+stack:
+  - Next.js
+  - React
+  - TypeScript
+  - Tailwind CSS
+  - Supabase
+  - Chrome Manifest V3
+  - dnd-kit
+  - React Hook Form
+  - Zod
+  - Hugeicons
+  - Motion
+publishedAt: "2026-06-15"
+---
+
+<ProjectMediaPlaceholder />
+
+Reway is a personal bookmark operating system for people who save heavily and need to find things later. It combines a private web library with a Chrome extension, so a page, a collected batch of links, or a full tab session can become a usable reference instead of another forgotten browser bookmark.
+
+The product is built around one rule: capture first, organise immediately, enrich asynchronously. Saving should feel instant; titles, descriptions, favicons, images, duplicate handling, and live updates can improve the result after the bookmark exists.
+
+## At a glance
+
+- **Product:** Cross-device bookmark library and browser capture tool
+- **For:** Researchers, designers, developers, and people who work across many tabs
+- **Surfaces:** Next.js web dashboard and Chrome Manifest V3 extension
+- **Core job:** Capture references quickly, then make them easy to recognise and retrieve
+- **Status:** Live and active development
+
+## The problem
+
+Browser bookmarks store links well, but they do little to help someone return to them. A growing collection becomes difficult to scan, organise, or trust, especially when the useful context lived in a tab session, a group of links on a page, or visual metadata that was never saved.
+
+Reway treats a bookmark as part of an active working library. The browser is the capture point; the dashboard is where saved material becomes searchable, grouped, and reusable.
+
+## My role
+
+My work spanned the web dashboard and browser extension:
+
+- Product model and capture-to-retrieval workflow
+- Authenticated, user-scoped library architecture
+- Dashboard views, search, grouping, and organisation tools
+- Chrome extension capture and quick-access flows
+- Metadata enrichment, realtime updates, and data integrity rules
+
+## What I built
+
+### A private, retrieval-first library
+
+- Authenticated, user-scoped bookmarks, groups, notes, and todos
+- Search, command workflows, group management, and visit-aware ranking
+- List, card, icon, and folder-board views for different ways of scanning a collection
+- Visual context through favicons, Open Graph images, titles, descriptions, and group colour
+- Cookie-backed dashboard preferences with validated fallbacks
+
+### Browser-native capture
+
+- **Save Page** for the current tab
+- **Save Links** for gathered link batches
+- **Tab Session** for turning the current window into a saved group
+- A quick-access floating surface for searching saved material and opening bookmark groups while browsing
+- Dashboard-to-extension group opening, cached extension reads, and optional X/Twitter bookmark capture
+
+### A deliberate save pipeline
+
+1. Capture from the web dashboard or Chrome extension.
+2. Authenticate and persist the bookmark in a private Supabase-backed library.
+3. Enrich metadata and update the saved result in real time.
+
+The visible save is kept separate from enrichment. URLs are normalised before persistence, data mutations remain user-scoped, and metadata fetching is treated as a follow-up phase rather than a reason to delay capture.
+
+## Product decisions
+
+### Capture should not interrupt research
+
+Reway saves the bookmark before attempting richer metadata work. That keeps the core action responsive even if a source page is slow or unavailable.
+
+### Retrieval needs more than folders
+
+Text search, visual metadata, flexible views, groups, notes, todos, and usage signals help someone recognise a saved reference again. A folder and URL alone rarely provide enough context.
+
+### The extension and dashboard have distinct jobs
+
+The extension owns browser-context capture and quick access. The dashboard owns the long-term library. Shared server routes keep the two surfaces connected without duplicating the persistence rules.
+
+## Outcome
+
+Reway turns browser capture into a private, cross-device working library. Pages, link batches, and tab sessions can be saved in the context where they are found, then searched, organised, and reused from the dashboard.
+
+The product is live and remains under active development. Adoption, retention, and revenue figures are not available yet.
+
+## Technology
+
+- **Application:** Next.js 16, React 19, and TypeScript
+- **UI:** Tailwind CSS 4, shadcn/ui, Hugeicons, and Motion
+- **Data and auth:** Supabase, PostgreSQL, and Supabase Auth
+- **Browser extension:** Chrome Manifest V3, vanilla JavaScript, and esbuild
+- **Interaction:** dnd-kit, React Hook Form, and Zod
+- **Tooling:** pnpm, oxlint, and oxfmt
+
+## Stack
+
+<ProjectStack />

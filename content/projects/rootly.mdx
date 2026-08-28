@@ -1,0 +1,99 @@
+---
+title: Rootly
+slug: rootly
+description: >-
+  A developer-focused learning notebook that turns study sessions into
+  structured notes, active recall, and measurable progress.
+summary: A learning notebook that connects study sessions with active recall.
+liveHref: "https://rootlynotes.vercel.app/"
+sourceHref: "https://github.com/mohamedgshoaib/rootly"
+order: 4
+featured: true
+status: published
+stack:
+  - Next.js
+  - React
+  - TypeScript
+  - Tailwind CSS
+  - Supabase
+  - TanStack Query
+  - Coss UI
+  - Base UI
+  - Motion
+  - Recharts
+  - Chrome Manifest V3
+publishedAt: "2026-06-15"
+---
+
+<ProjectMediaPlaceholder />
+
+Rootly is a developer-focused learning notebook for self-taught developers and serious learners. It turns scattered study sessions into structured notes, reviewable knowledge, and measurable progress.
+
+The product is built for active learning rather than generic note-taking: capture what you learn, connect it to courses, record study time and mood, revisit it through active recall, and use the overview to see how your learning is developing.
+
+## At a glance
+
+- **Audience:** Self-taught developers and serious learners
+- **Core job:** Turn study activity into structured notes, review, and visible progress
+- **Surfaces:** Marketing site, authenticated dashboard, browser side panel, and Supabase backend
+- **Status:** Live and active development
+
+## The challenge
+
+Study notes tend to scatter across documents, apps, and browser tabs. Capture needs to be quick while someone is studying, but the saved material also needs to be worth returning to. Otherwise Rootly would become one more system for the learner to maintain.
+
+Rootly needed to connect note-taking, course context, daily practice, review, and progress without drifting into a generic workspace or collaboration tool.
+
+## My role
+
+I worked across the v2 dashboard and browser extension:
+
+- The active-learning product model and dashboard information architecture
+- Q&A and freeform note workflows
+- Course organisation, daily entries, and active-recall review
+- Progress views for trends, consistency, and mastery
+- Browser side-panel capture tied to the existing website session
+
+## What I built
+
+### Notes and structure
+
+- Q&A notes for active recall and freeform notes for flexible study capture
+- Course organisation while keeping uncategorised notes available
+
+### Practice and review
+
+- Daily study-time and mood logging for a consistent learning record
+- Review sessions that update understanding levels over time
+- Overview charts and summaries for study trends, consistency, and mastery
+
+### Capture in context
+
+- A browser side panel for capturing notes and daily entries without leaving the page being studied
+
+Authenticated dashboard routes cover overview, notes, courses, daily entries, and review. The extension uses the same website session, so its capture flows add material to the existing library without introducing a separate account or token model.
+
+## Product foundations
+
+Rootly uses a cloud-first application model: Supabase Auth and Row Level Security scope reads and writes to the signed-in learner, while the dashboard shell and route groups keep marketing, authentication, and learning workflows distinct.
+
+Interactive areas such as notes, courses, daily entries, and review use TanStack Query. Cache lifetimes, tags, and targeted invalidation keep the dashboard fresh, while extension writes use payload normalization and idempotency handling so captured notes and entries can appear reliably in the dashboard.
+
+## Outcome
+
+Rootly keeps capture, review, and progress in one learning notebook. Learners can record what they study in context, return to it through active recall, and follow their practice over time.
+
+Version 2 is live and remains under active development. Adoption, retention, and learning-outcome figures are not available yet.
+
+## Technology
+
+- **Application:** Next.js 16, React 19, TypeScript, and Tailwind CSS 4
+- **Data and auth:** Supabase Auth, PostgreSQL, and Row Level Security
+- **Dashboard:** TanStack Query, Motion, and Recharts
+- **UI:** Coss UI on Base UI
+- **Extension:** Chrome Manifest V3 side-panel APIs
+- **Quality:** Oxlint and Oxfmt
+
+## Stack
+
+<ProjectStack />

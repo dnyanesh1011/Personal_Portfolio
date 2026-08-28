@@ -1,0 +1,44 @@
+{
+  "name": "personal-portfolio",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "typecheck": "fumadocs-mdx && tsc --noEmit",
+    "doctor": "npx react-doctor@latest"
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.5.0",
+    "@tabler/icons-react": "3.44.0",
+    "@teispace/next-themes": "^2.0.4",
+    "@types/mdx": "^2.0.14",
+    "@web-kits/audio": "^0.1.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "fumadocs-core": "^16.9.3",
+    "fumadocs-mdx": "^15.0.11",
+    "motion": "^12.40.0",
+    "next": "16.2.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "tailwind-merge": "^3.6.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "oxfmt": "^0.54.0",
+    "oxlint": "^1.69.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

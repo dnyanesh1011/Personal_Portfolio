@@ -1,0 +1,92 @@
+---
+title: "React in 2026: Patterns That Still Hold Up"
+slug: react-in-2026-patterns-that-still-hold-up
+description: Server-first defaults, early type boundaries, and composition patterns that still make React codebases easier to live with.
+excerpt: Three React habits I still trust in 2026 because they remove moving parts instead of adding ceremony.
+publishedAt: "2026-06-16"
+updatedAt: "2026-06-16"
+category: Essay
+status: published
+featured: true
+order: 1
+readingTime: "6 min read"
+---
+
+![Cover image for the React in 2026 writing post.](/assets/writing/react-rules.webp)
+
+React feels calmer than it did a few years ago. New APIs and tools still arrive every week, but the patterns I keep tend to make a codebase less busy.
+
+These are the three I still reach for first.
+
+## 1. Server-First Is the Right Default in App Router Projects
+
+Not every component belongs on the server. The useful change is the question I ask first.
+
+In a Next.js App Router codebase, I usually ask whether the work can happen before the component reaches the browser. When it can, I end up with less state, less orchestration, and fewer places for the UI to get out of sync.
+
+```tsx
+export default async function UserProfile({ id }: { id: string }) {
+  const user = await db.user.findUnique({ where: { id } })
+
+  if (!user) {
+    return <div>User not found.</div>
+  }
+
+  return <div>{user.name}</div>
+}
+```
+
+Client components still matter. They are the right place for interactivity, local state, browser APIs, and optimistic workflows. The server can handle more of the routine work, leaving client components to focus on interaction.
+
+## 2. Type Boundaries Should Be Decided Early
+
+Most painful TypeScript codebases I have seen are not painful because they are too strict. They are painful because the strictness arrives late, after the wrong shapes have already spread through the app.
+
+I define boundary types early: route params, form payloads, persisted records, and component contracts.
+
+```ts
+type UserRole = "admin" | "member"
+
+interface UserConfig {
+  role: UserRole
+  notifications: boolean
+  theme: "light" | "dark"
+}
+
+function getDashboardHref(role: UserRole): string {
+  switch (role) {
+    case "admin":
+      return "/admin"
+    case "member":
+      return "/dashboard"
+  }
+}
+```
+
+Early boundary work is not glamorous, but it keeps mistakes local. It also makes refactors feel less like archaeology.
+
+## 3. Composition Still Beats Boolean Prop Piles
+
+When a component starts collecting flags like `isCompact`, `showHeader`, `hasError`, `withBorder`, and `showFooter`, I take it as a sign that the API needs a different shape.
+
+```tsx
+<Card>
+  <CardHeader>Profile</CardHeader>
+  <CardContent>...</CardContent>
+  <CardFooter>
+    <Button>Save</Button>
+  </CardFooter>
+</Card>
+```
+
+Composition is easier to extend because the structure stays visible. It also avoids the slow drift where one component becomes a box of conditional branches nobody wants to touch.
+
+## What These Patterns Have In Common
+
+The React patterns I trust most are the ones that remove moving parts:
+
+1. fetch on the server when the server is the natural place to do the work
+2. define type boundaries before implementation spreads
+3. prefer composition when a component API starts collapsing under options
+
+Fewer moving parts mean less to break and less to explain. That leaves more time for the product itself.

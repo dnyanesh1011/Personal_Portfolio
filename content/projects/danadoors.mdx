@@ -1,0 +1,123 @@
+---
+title: Dana Doors
+slug: danadoors
+description: >-
+  A bilingual Arabic/English catalogue and enquiry website for a doors,
+  windows, and architectural-products business.
+summary: A retail showroom for doors, windows, kitchens, and construction products.
+liveHref: "https://danadoors.net/"
+order: 1
+featured: true
+status: published
+stack:
+  - Next.js
+  - React
+  - TypeScript
+  - Tailwind CSS
+  - Radix UI
+  - shadcn/ui
+  - Cloudinary
+  - Upstash Redis
+  - Resend
+  - next-intl
+  - React Hook Form
+  - Zod
+publishedAt: "2026-06-15"
+---
+
+<ProjectMediaPlaceholder />
+
+Dana Doors helps visitors browse a visual product range, compare specifications, view completed work, and choose the right next step: request a quote, arrange a consultation, contact the team, or apply for a role.
+
+## At a glance
+
+- **Project type:** Bilingual marketing site, product catalogue, and enquiry platform
+- **Status:** Production
+- **Languages:** Arabic and English, with RTL and LTR layouts
+- **Catalogue:** Doors, windows, handrails, kitchens, dressing rooms, and woodwork
+- **Main journeys:** Product discovery, product detail, photo gallery, projects, quote, consultation, contact, and recruitment
+- **Media:** Cloudinary-backed catalogue and gallery imagery
+- **Delivery stack:** Next.js 16, React 19, TypeScript, Tailwind CSS, and Vercel
+
+## The brief
+
+Dana Doors needed a public site for a broad, image-led product range. Visitors need time to understand a product, inspect its details, and discuss their project before they are ready to buy. A catalogue and enquiry flow made more sense than a checkout-first store.
+
+Arabic and English had to work equally well. Locale-aware routing, right-to-left layout, localised content, metadata, and typography were built into the site from the start.
+
+## The challenge
+
+The product range is broad, visual, and rarely a one-click purchase. People need enough context to compare products, inspect details, see finished work, and decide whether to ask for a quote or a consultation.
+
+The catalogue needed enough structure to stay easy to browse without cutting out the details that help an architectural enquiry move forward. The same routes and interactions also had to hold together in Arabic and English.
+
+## My role
+
+For Dana Doors, through Devloop, I was responsible for:
+
+- Product discovery and information architecture
+- Arabic/English route design and RTL/LTR interface work
+- Product detail, gallery, project, and enquiry flows
+- Search foundations, structured data, and metadata
+- Form validation, email delivery, rate limiting, and accessibility details
+
+## What I built
+
+### Catalogue and visual discovery
+
+- A bilingual catalogue with category pages and individual product-detail pages.
+- Product specifications, usage information, maintenance guidance, installation notes, and image galleries.
+- Cloudinary-backed product and project media with a filterable photo gallery.
+
+### Enquiry and relationship-building
+
+- Quote, consultation, contact, and job-application forms with localised confirmation and team email flows.
+- Project, about, ordering, privacy, terms, and company-information pages.
+
+### Accessible, discoverable foundations
+
+- Responsive navigation, light/dark themes, keyboard-accessible gallery interactions, and reduced-motion handling.
+- Search foundations including page metadata, canonical and alternate locale links, robots rules, multilingual sitemap entries, structured data, and social images.
+
+## Product experience
+
+The primary path is designed around how a considered architectural-product enquiry develops:
+
+1. Browse a category.
+2. Inspect a product and its specifications.
+3. Review imagery, projects, and ordering information.
+4. Request a quote or consultation.
+
+Arabic is the default locale, and the application serves the same core journeys through `/ar` and `/en` route trees. The app is server-routed with focused client-side interaction for menus, themes, forms, carousels, and gallery controls; it is not a single-page application.
+
+## Platform foundations
+
+Product and translation data live in the application, while Cloudinary handles visual media. Shared catalogue and media helpers keep route generation, product lookup, image resolution, and gallery normalization aligned.
+
+Form submissions are validated with Zod, protected with honeypot and rate-limit checks, and delivered through Resend. The public experience combines server-routed pages with focused client-side interaction for menus, themes, forms, carousels, and gallery controls.
+
+## Outcome
+
+A visitor can browse products and completed work, check the relevant details, and contact the team with a specific request without switching between disconnected sites or documents.
+
+The catalogue, galleries, project pages, and enquiry paths share the same content and navigation model in Arabic and English.
+
+## Current status
+
+The delivered bilingual site has since received interface, accessibility, routing, and reliability refinements. The project has automated coverage for catalogue lookup, media normalization, form validation, email formatting, locale handling, rate limiting, and media-query hooks.
+
+## Technology
+
+- **Application:** Next.js 16 App Router, React 19, TypeScript
+- **Styling and UI:** Tailwind CSS 4, Radix UI, shadcn/ui patterns, Phosphor icons
+- **Interaction:** Framer Motion, Embla Carousel, React Hook Form, Sonner
+- **Validation:** Zod
+- **Content:** Repository-managed Arabic and English dictionaries and product data
+- **Media:** Cloudinary and `next-cloudinary`
+- **Email:** Resend with localised HTML email templates
+- **Protection and persistence:** Upstash Redis, with local visit-counter fallback
+- **Hosting target:** Vercel
+
+## Stack
+
+<ProjectStack />

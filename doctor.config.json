@@ -1,0 +1,15 @@
+{
+  "$schema": "https://react.doctor/schema/config.json",
+  "ignore": {
+    "overrides": [
+      {
+        "files": [
+          "app/opengraph-image.tsx",
+          "app/projects/opengraph-image.tsx",
+          "app/writing/opengraph-image.tsx"
+        ],
+        "rules": ["react-doctor/only-export-components"]
+      }
+    ]
+  }
+}

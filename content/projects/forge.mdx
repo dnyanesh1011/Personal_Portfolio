@@ -1,0 +1,105 @@
+---
+title: Forge
+slug: forge
+description: >-
+  A CLI that generates clean React starters with the app shell, localization,
+  metadata, and code-quality setup already wired.
+summary: A CLI for creating React projects with app-shell foundations ready.
+liveHref: "https://use-forge.vercel.app/"
+sourceHref: "https://github.com/mohamedgshoaib/forge"
+order: 6
+featured: true
+status: published
+stack:
+  - TypeScript
+  - Node.js
+  - React
+  - Next.js
+  - Vite
+  - TanStack Start
+  - shadcn/ui
+  - Base UI
+  - Radix UI
+  - next-intl
+  - react-i18next
+  - Biome
+publishedAt: "2026-06-15"
+---
+
+<ProjectMediaPlaceholder />
+
+Forge is a CLI that generates clean React starters for teams who want to begin with the app shell already wired.
+
+It combines a shadcn scaffold with Forge-owned setup for theme switching, optional RTL routing, framework-specific i18n, sound hooks, fallback pages, metadata, code-quality tooling, and starter documentation. The generated app stays intentionally small so it is easy to understand and replace.
+
+## At a glance
+
+- **Product:** `create-use-forge`, a React starter generator
+- **Supported frameworks:** Next.js, Vite, and TanStack Start
+- **UI bases:** Base UI or Radix through shadcn scaffolds
+- **Direction:** LTR or English/Arabic RTL
+- **Default preset:** Next.js, Base UI, LTR, pnpm, and Biome
+- **Status:** Production
+
+## The challenge
+
+Starting a serious React project often begins with an hour of chores: routing, theming, i18n, metadata, fallback pages, linting, formatting, and the first pass at an app shell. That setup is necessary, but it is rarely the work a team is trying to begin with.
+
+Forge came from wanting that starting point to feel less like copying yesterday's project while keeping the generated result small enough to understand, own, and change.
+
+## My role
+
+I owned:
+
+- The CLI configuration and interactive generation experience
+- Framework-aware scaffolding for Next.js, Vite, and TanStack Start
+- App-shell overlays for providers, routing, themes, metadata, and fallback surfaces
+- Optional English/Arabic RTL runtime behavior
+- Feature packs for sounds, documentation, dependency freshness, CSS polish, and code quality
+- Generation verification and retained regression fixtures
+
+## What Forge generates
+
+### The core starter
+
+Every generated starter includes:
+
+- A minimal editable starter page
+- Theme switching
+- Framework-native error and not-found surfaces
+- Favicon and minimal metadata
+- Centralized click and theme-switch sound hooks
+- A README with the selected package manager’s commands
+- One selected lint and format setup
+
+### RTL as a first-class option
+
+RTL mode adds English and Arabic locale routes, a language switch, and runtime `lang` and `dir` handling. Next.js uses `next-intl`; Vite and TanStack Start use `react-i18next`.
+
+## How the generator works
+
+Forge is a single-package TypeScript CLI built around three layers:
+
+1. A scaffold adapter invokes the current shadcn scaffold for the selected framework and primitive base.
+2. A framework overlay adds the app shell, routing, providers, fallback surfaces, and framework-specific files.
+3. Feature packs add shared concerns such as sounds, metadata, docs, dependency freshness, CSS polish, RTL runtime behavior, and code quality.
+
+Generated projects are verified after generation through the selected package manager’s install, formatting, lint, typecheck, and build commands. Retained fixtures are generated outputs used as regression targets rather than hand-maintained template copies.
+
+## Outcome
+
+A Forge project starts with the recurring setup already in place, while staying small enough for a team to inspect, own, and replace piece by piece.
+
+The production release is available as `create-use-forge` version `0.1.4`.
+
+## Technology
+
+- **Core:** TypeScript and Node.js
+- **Framework targets:** Next.js, Vite, and TanStack Start
+- **UI:** shadcn scaffolds with Base UI or Radix
+- **Localization:** `next-intl` and `react-i18next`
+- **Quality:** Biome, ESLint/Prettier, or Oxlint/Oxfmt according to the selected configuration
+
+## Stack
+
+<ProjectStack />
