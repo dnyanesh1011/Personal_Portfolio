@@ -10,6 +10,7 @@ import { Kbd } from "@/components/ui/kbd"
 import type { IconLinkButtonItem } from "@/components/action-link/icon-link"
 import type { ActionLinkRecord } from "@/lib/content/content-types"
 import { click, toggleOff, toggleOn } from "@/lib/audio/minimal"
+import { vibrate } from "@/lib/haptics"
 
 const navigationItems = [
   {
@@ -58,6 +59,8 @@ export function HomepageDock({
       kind: "button",
       label: "Toggle theme",
       onClick: () => {
+        vibrate()
+
         if (resolvedThemeRef.current === "dark") {
           playToggleOn()
           setTheme("light")
@@ -68,7 +71,7 @@ export function HomepageDock({
       },
       tooltip: themeTooltip,
     }),
-    [setTheme, playToggleOn, playToggleOff]
+    [setTheme, playToggleOn, playToggleOff],
   )
 
   const pill = (
@@ -76,13 +79,16 @@ export function HomepageDock({
       as="div"
       className={dockPillClassName}
       items={[
-          ...navigationItems,
-          ...socialLinks.filter((item) =>
-            ["github", "linkedin", "x", "email"].includes(item.kind)
-          ),
-          themeItem,
-        ]}
-      onItemClick={playClick}
+        ...navigationItems,
+        ...socialLinks.filter((item) =>
+          ["github", "linkedin", "x", "email"].includes(item.kind),
+        ),
+        themeItem,
+      ]}
+      onItemClick={() => {
+  vibrate()
+  playClick()
+}}
       variant="dock"
     />
   )
@@ -109,12 +115,14 @@ export function HomepageDock({
         <div className="absolute inset-0 backdrop-blur-[6px] [mask:linear-gradient(to_bottom,transparent_75%,black_87.5%,black_100%)]" />
         <div className="absolute inset-0 backdrop-blur-[12px] [mask:linear-gradient(to_bottom,transparent_87.5%,black_100%)]" />
       </div>
+
       {/* Mobile fallback (pointer:coarse): gradient fade — zero GPU compositing
           cost, same semantic signal as the blur zone. */}
       <div
         aria-hidden="true"
         className="pointer-events-auto fixed inset-x-0 bottom-0 z-[39] h-20 bg-gradient-to-t from-background to-transparent sm:h-[4.75rem] [@media(pointer:fine)]:hidden"
       />
+
       <nav
         aria-label="Primary navigation"
         className="pointer-events-none fixed inset-x-0 bottom-6 z-40 flex justify-center px-6"

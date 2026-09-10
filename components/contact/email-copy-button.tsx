@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { useSound } from "@web-kits/audio/react"
 
 import { copy } from "@/lib/audio/minimal"
+import { vibrate } from "@/lib/haptics"
 import { AnimatedEntityBackground } from "@/components/editorial-entity/animated-entity-background"
 import { TextRoll } from "@/components/contact/text-roll"
 import { useMediaQuery } from "@/hooks/use-media-query"
@@ -59,31 +60,67 @@ export function EmailCopyButton({
 
   function copyEmail(): void {
     playClick()
+
     const requestId = copyRequestId.current + 1
     copyRequestId.current = requestId
 
-    void navigator.clipboard
-      .writeText(email)
-      .then(() => {
-        if (copyRequestId.current !== requestId) {
+    const handleSuccess = () => {
+      if (copyRequestId.current !== requestId) {
+        return
+      }
+
+      vibrate()
+
+      setCopyFeedback((currentFeedback) => ({
+        state: "copied",
+        token: currentFeedback.token + 1,
+      }))
+    }
+
+    const handleError = () => {
+      if (copyRequestId.current !== requestId) {
+        return
+      }
+
+      setCopyFeedback((currentFeedback) => ({
+        state: "error",
+        token: currentFeedback.token + 1,
+      }))
+    }
+
+    const copyWithFallback = async () => {
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(email)
+          handleSuccess()
           return
         }
+      } catch {
+        // Fall through to the legacy clipboard fallback.
+      }
 
-        setCopyFeedback((currentFeedback) => ({
-          state: "copied",
-          token: currentFeedback.token + 1,
-        }))
-      })
-      .catch(() => {
-        if (copyRequestId.current !== requestId) {
-          return
+      const textarea = document.createElement("textarea")
+      textarea.value = email
+      textarea.setAttribute("readonly", "")
+      textarea.style.position = "fixed"
+      textarea.style.opacity = "0"
+      document.body.appendChild(textarea)
+      textarea.select()
+
+      try {
+        if (document.execCommand("copy")) {
+          handleSuccess()
+        } else {
+          handleError()
         }
+      } catch {
+        handleError()
+      } finally {
+        document.body.removeChild(textarea)
+      }
+    }
 
-        setCopyFeedback((currentFeedback) => ({
-          state: "error",
-          token: currentFeedback.token + 1,
-        }))
-      })
+    void copyWithFallback()
   }
 
   const label =

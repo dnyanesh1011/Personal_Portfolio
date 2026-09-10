@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo, useRef, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import type * as React from "react"
@@ -49,7 +49,7 @@ function getSharedClassName({
       variant: "ghost",
     }),
     "transition-[color,scale] duration-150 ease-[var(--ease-interface)] hover:bg-transparent focus-visible:bg-transparent active:scale-[0.96] data-pressed:bg-transparent motion-reduce:active:scale-100",
-    itemClassName
+    itemClassName,
   )
 }
 
@@ -78,24 +78,73 @@ export function AnimatedIconLinkGroup({
 }): React.ReactElement {
   const tooltipHandle = useMemo(
     () => TooltipCreateHandle<React.ReactNode>(),
-    []
+    [],
   )
 
   const pathname = usePathname()
 
+  const iconRefs = useRef(new Map<string, HTMLSpanElement>())
+  const resetTimeoutRef = useRef<number | null>(null)
+
+  const updateMagnification = (clientX: number): void => {
+    iconRefs.current.forEach((element) => {
+      const rect = element.getBoundingClientRect()
+      const centerX = rect.left + rect.width / 2
+      const distance = Math.abs(clientX - centerX)
+
+      const influence = Math.max(0, 1 - distance / 112)
+      const scale = 1 + 0.32 * influence * influence
+
+      element.style.transform = `scale(${scale})`
+    })
+  }
+
+  const resetMagnification = (): void => {
+    iconRefs.current.forEach((element) => {
+      element.style.transform = "scale(1)"
+    })
+  }
+
+  const handlePointerEnter = (
+    event: React.PointerEvent<HTMLDivElement>,
+  ): void => {
+    if (resetTimeoutRef.current !== null) {
+      window.clearTimeout(resetTimeoutRef.current)
+      resetTimeoutRef.current = null
+    }
+
+    updateMagnification(event.clientX)
+  }
+
+  const handlePointerMove = (
+    event: React.PointerEvent<HTMLDivElement>,
+  ): void => {
+    updateMagnification(event.clientX)
+  }
+
+  const handlePointerLeave = (): void => {
+    resetTimeoutRef.current = window.setTimeout(() => {
+      resetMagnification()
+      resetTimeoutRef.current = null
+    }, 80)
+  }
+
   const activeItemId = useMemo(() => {
     if (!showActiveRoute) return undefined
+
     const activeItem = items.find(
       (item) =>
         "href" in item &&
         typeof (item as IconLinkHrefItem).href === "string" &&
         (item as IconLinkHrefItem).href.startsWith("/") &&
-        isPathActive((item as IconLinkHrefItem).href, pathname)
+        isPathActive((item as IconLinkHrefItem).href, pathname),
     )
+
     return activeItem ? (activeItem.id ?? activeItem.label) : undefined
   }, [showActiveRoute, items, pathname])
 
   const [pendingActiveId, setPendingActiveId] = useState<string | null>(null)
+
   // Derive during render: pending is effective until activeItemId catches up.
   const effectiveDefaultValue =
     pendingActiveId && pendingActiveId !== activeItemId
@@ -116,6 +165,8 @@ export function AnimatedIconLinkGroup({
         transition={surfaceBackgroundTransition}
       >
         {items.map((item) => {
+          const itemId = item.id ?? item.label
+
           const isInternalLink =
             "href" in item &&
             typeof (item as IconLinkHrefItem).href === "string" &&
@@ -131,14 +182,35 @@ export function AnimatedIconLinkGroup({
             showActiveRoute &&
               isInternalLink &&
               !isActive &&
-              "text-muted-foreground"
+              "text-muted-foreground",
+          )
+
+          const icon = (
+            <span
+              className="inline-flex origin-center transition-transform duration-150 ease-out will-change-transform"
+              ref={(element) => {
+                if (element) {
+                  iconRefs.current.set(itemId, element)
+                } else {
+                  iconRefs.current.delete(itemId)
+                }
+              }}
+            >
+              <item.icon
+                aria-hidden="true"
+                className={iconSizeClass[size]}
+              />
+            </span>
           )
 
           return (
             <div
-              className="cursor-pointer"
-              data-id={item.id ?? item.label}
-              key={item.id ?? item.label}
+              className="flex aspect-square cursor-pointer items-center justify-center rounded-full"
+              data-id={itemId}
+              key={itemId}
+              onPointerEnter={handlePointerEnter}
+              onPointerLeave={handlePointerLeave}
+              onPointerMove={handlePointerMove}
             >
               <TooltipTrigger
                 handle={tooltipHandle}
@@ -151,10 +223,7 @@ export function AnimatedIconLinkGroup({
                       onClick={(item as IconLinkButtonItem).onClick}
                       type="button"
                     >
-                      <item.icon
-                        aria-hidden="true"
-                        className={iconSizeClass[size]}
-                      />
+                      {icon}
                     </button>
                   ) : (
                     <Link
@@ -163,8 +232,9 @@ export function AnimatedIconLinkGroup({
                       href={(item as IconLinkHrefItem).href}
                       onClick={(e) => {
                         if (isInternalLink) {
-                          setPendingActiveId(item.id ?? item.label)
+                          setPendingActiveId(itemId)
                         }
+
                         onItemClick?.()
                         ;(item as IconLinkHrefItem).onClick?.(e)
                       }}
@@ -175,10 +245,7 @@ export function AnimatedIconLinkGroup({
                       }
                       target={(item as IconLinkHrefItem).target}
                     >
-                      <item.icon
-                        aria-hidden="true"
-                        className={iconSizeClass[size]}
-                      />
+                      {icon}
                     </Link>
                   )
                 }
@@ -187,9 +254,15 @@ export function AnimatedIconLinkGroup({
           )
         })}
       </AnimatedBackground>
+
       <Tooltip handle={tooltipHandle}>
         {({ payload }) => (
-          <TooltipPopup sideOffset={tooltipSideOffset}>{payload}</TooltipPopup>
+          <TooltipPopup
+            instantPosition={size === "dock"}
+            sideOffset={tooltipSideOffset}
+          >
+            {payload}
+          </TooltipPopup>
         )}
       </Tooltip>
     </IconLinkGroup>

@@ -1,11 +1,17 @@
 import type * as React from "react"
 
-import { SignatureMark } from "@/components/homepage/signature-mark"
+import { RandomQuote } from "@/components/homepage/random-quote"
 
-export function HomepageFooter(): React.ReactElement {
+type HomepageFooterProps = {
+  stagger?: number
+}
+
+export function HomepageFooter({
+  stagger = 0,
+}: HomepageFooterProps): React.ReactElement {
   return (
-    <footer className="mt-20 flex flex-row items-center justify-between gap-4 pb-16 text-sm text-muted-foreground">
-      <SignatureMark />
+    <footer className="mt-20 pb-16 text-sm text-muted-foreground">
+      <RandomQuote stagger={stagger} />
     </footer>
   )
 }

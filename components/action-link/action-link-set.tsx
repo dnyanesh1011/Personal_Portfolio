@@ -12,6 +12,7 @@ import { useSound } from "@web-kits/audio/react"
 
 import { resolveActionLinkItem } from "@/components/action-link/action-link-resolver"
 import { click, copy } from "@/lib/audio/minimal"
+import { vibrate } from "@/lib/haptics"
 import { AnimatedIconLinkGroup } from "@/components/action-link/animated-icon-link-group"
 import type {
   IconLinkItem,
@@ -123,9 +124,38 @@ export function ActionLinkSet({
         label,
         onClick: () => {
           playCopy()
-          void navigator.clipboard
-            .writeText(email)
-            .then(() => setEmailCopied(true))
+
+          const copyEmail = async () => {
+            try {
+              if (navigator.clipboard?.writeText) {
+                await navigator.clipboard.writeText(email)
+                vibrate()
+                setEmailCopied(true)
+                return
+              }
+            } catch {
+              // Fall through to the legacy clipboard fallback.
+            }
+
+            const textarea = document.createElement("textarea")
+            textarea.value = email
+            textarea.setAttribute("readonly", "")
+            textarea.style.position = "fixed"
+            textarea.style.opacity = "0"
+            document.body.appendChild(textarea)
+            textarea.select()
+
+            try {
+              if (document.execCommand("copy")) {
+              vibrate()
+              setEmailCopied(true)
+            }
+            } finally {
+              document.body.removeChild(textarea)
+            }
+          }
+
+          void copyEmail()
         },
         tooltip: label,
       }

@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import { ContactSection } from "@/components/contact/contact-section";
 import { HomepageDock } from "@/components/dock/homepage-dock";
 import { HomepageFooter } from "@/components/homepage/homepage-footer";
+import { SkillsList } from "@/components/homepage/skills-list";
 import {
   HomeSection,
   PageContent,
@@ -12,8 +13,7 @@ import {
 } from "@/components/homepage/homepage-layout";
 import { ProjectList } from "@/components/editorial-entity/project-list";
 import { StructuredData } from "@/components/metadata/structured-data";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { WritingList } from "@/components/editorial-entity/writing-list";
+import { FlipAvatar } from "@/components/homepage/flip-avatar";
 import { homepageContent } from "@/lib/content/content-discovery";
 import { getRouteMetadata } from "@/lib/metadata/site-metadata";
 import {
@@ -26,7 +26,7 @@ import { HomepageScrollReset } from "@/components/homepage/homepage-scroll-reset
 export const metadata: Metadata = getRouteMetadata("/");
 
 export default function Page(): React.ReactElement {
-  const { identity, about, approach, projects, writing, socialLinks } =
+  const { identity, about, approach, projects, socialLinks } =
     homepageContent;
 
   /*
@@ -64,6 +64,29 @@ export default function Page(): React.ReactElement {
 
   const aboutParagraphs = about.split("\n\n");
   const approachParagraphs = approach.split("\n\n");
+const skills = [
+  { name: "C++", icon: "skill-icons:cpp" },
+  { name: "Go", icon: "logos:go" },
+  { name: "Typescript", icon: "skill-icons:typescript" },
+  { name: "Python", icon: "logos:python" },
+  { name: "React", icon: "logos:react" },
+  { name: "Amazon Web Services", icon: "logos:aws" },
+  { name: "Docker", icon: "logos:docker-icon" },
+  { name: "Kubernetes", icon: "logos:kubernetes" },
+  { name: "GitHub Actions", icon: "logos:github-actions" },
+  { name: "Postman", icon: "logos:postman-icon" },
+  { name: "SQL", icon: "vscode-icons:file-type-sql" },
+  { name: "Next.js", icon: "logos:nextjs-icon" },
+  { name: "Clerk", icon: "simple-icons:clerk" },
+  { name: "SonarQube", icon: "logos:sonarqube" },
+  { name: "Apache Airflow", icon: "devicon:apacheairflow" },
+  { name: "Kafka", icon: "devicon:apachekafka" },
+  { name: "ArgoCD", icon: "devicon:argocd" },
+  { name: "MongoDB", icon: "logos:mongodb-icon" },
+  { name: "PostgreSQL", icon: "logos:postgresql" },
+  { name: "Prisma", icon: "skill-icons:prisma" },
+  { name: "OpenSearch", icon: "devicon:opensearch" },
+];
 
   const aboutHeadingStagger = 3;
   const aboutParagraphStart = aboutHeadingStagger + 1;
@@ -79,14 +102,16 @@ export default function Page(): React.ReactElement {
   const approachParagraphStart =
     approachHeadingStagger + 1;
 
-  const writingHeadingStagger =
+  const skillsHeadingStagger =
     approachParagraphStart + approachParagraphs.length;
 
-  const writingStartStagger =
-    writingHeadingStagger + 1;
+  const skillsStartStagger =
+    skillsHeadingStagger + 1;
 
   const contactStagger =
-    writingStartStagger + writing.length;
+    skillsStartStagger + skills.length;
+
+  const quoteStagger = contactStagger + 1;
 
   return (
     <PageShell>
@@ -118,20 +143,10 @@ export default function Page(): React.ReactElement {
             </p>
           </div>
 
-          <Avatar
-            className="blur-fade size-24 shrink-0 rounded-full"
+          <FlipAvatar
+            className="blur-fade size-24 shrink-0"
             style={{ "--stagger": 2 } as CSSProperties}
-          >
-            <AvatarImage
-              alt="Dnyanesh Fulsundar"
-              className="object-contain"
-              fetchPriority="high"
-              sizes="96px"
-              src="/assets/avatar/avatar.webp"
-              width={96}
-              height={96}
-            />
-          </Avatar>
+          />
         </header>
 
         {/* -------------------------------------------------- */}
@@ -245,7 +260,7 @@ export default function Page(): React.ReactElement {
         </HomeSection>
 
         {/* -------------------------------------------------- */}
-        {/* Writing */}
+        {/* Skills */}
         {/* -------------------------------------------------- */}
 
         <HomeSection
@@ -254,29 +269,18 @@ export default function Page(): React.ReactElement {
               className="blur-fade"
               style={
                 {
-                  "--stagger": writingHeadingStagger,
+                  "--stagger": skillsHeadingStagger,
                 } as CSSProperties
               }
             >
-              <SectionHeader
-                actionHref="/writing"
-                actionIntent={{
-                  key: navigationIntentKeys.writingArchiveBackHref,
-                  type: "set",
-                  value: "/",
-                }}
-                actionLabel="view All"
-                title="writing"
-              />
+              <SectionHeader actionLabel="View All" title="skills" />
             </div>
           }
-          id="writing"
-          rhythm="list"
+          id="skills"
         >
-          <WritingList
-            posts={writing}
-            source="home"
-            staggerStart={writingStartStagger}
+          <SkillsList
+            skills={skills}
+            staggerStart={skillsStartStagger}
           />
         </HomeSection>
 
@@ -300,7 +304,7 @@ export default function Page(): React.ReactElement {
         socialLinks={socialLinks}
       />
 
-      <HomepageFooter />
+      <HomepageFooter stagger={quoteStagger} />
     </PageShell>
   );
 }

@@ -246,7 +246,7 @@
   --accent: --alpha(var(--color-white) / 4%);
   --accent-foreground: var(--color-neutral-100);
 
-  --background: #0a0a0a;
+  --background: #000000;
   --foreground: #ededed;
   --muted: #9ca3af;
   --border: #262626;
@@ -411,6 +411,40 @@
   animation-delay: calc(var(--stagger, 0) * 120ms);
 }
 
+.flip-avatar {
+  perspective: 1000px;
+  border-radius: 9999px;
+}
+
+.flip-avatar__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.flip-avatar:hover .flip-avatar__inner {
+  transform: rotateY(180deg);
+}
+
+.flip-avatar__face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 9999px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-avatar__front {
+  transform: rotateY(0deg);
+}
+
+.flip-avatar__back {
+  transform: rotateY(180deg);
+}
+
   @media (hover: hover) and (pointer: fine) {
 
     /* Slow exit — lens relaxing back to neutral */
@@ -434,14 +468,27 @@
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .blur-fade {
-      opacity: 1;
-      animation: none;
-      filter: none;
-      transform: none;
-    }
+@media (prefers-reduced-motion: reduce) {
+  .blur-fade {
+    opacity: 1;
+    animation: none;
+    filter: none;
+    transform: none;
   }
+
+  .flip-avatar__inner {
+    transition: none;
+    transform: none;
+  }
+
+  .flip-avatar:hover .flip-avatar__inner {
+    transform: none;
+  }
+
+  .flip-avatar__back {
+    visibility: hidden;
+  }
+}
 
   .entity-sibling-dimming[data-active="true"][data-checked="false"] {
     filter: none;
