@@ -31,6 +31,7 @@ export type ProjectContent = {
   screenshotSrc?: string
   slug: string
   sourceHref: string | null
+  stack: readonly string[]
   summary: string
 }
 

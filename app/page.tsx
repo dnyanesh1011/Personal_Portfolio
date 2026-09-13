@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import { ContactSection } from "@/components/contact/contact-section";
 import { HomepageDock } from "@/components/dock/homepage-dock";
 import { HomepageFooter } from "@/components/homepage/homepage-footer";
+import { ProjectSkillHighlightProvider } from "@/components/homepage/project-skill-highlight-provider";
 import { SkillsList } from "@/components/homepage/skills-list";
 import {
   HomeSection,
@@ -88,30 +89,30 @@ const skills = [
   { name: "OpenSearch", icon: "devicon:opensearch" },
 ];
 
-  const aboutHeadingStagger = 3;
-  const aboutParagraphStart = aboutHeadingStagger + 1;
+const aboutHeadingStagger = 3;
+const aboutParagraphStart = aboutHeadingStagger + 1;
 
-  const projectsHeadingStagger =
-    aboutParagraphStart + aboutParagraphs.length;
+const projectsHeadingStagger =
+  aboutParagraphStart + aboutParagraphs.length;
 
-  const projectsStartStagger = projectsHeadingStagger + 1;
+const projectsStartStagger = projectsHeadingStagger + 1;
 
-  const approachHeadingStagger =
-    projectsStartStagger + projects.length;
+const skillsHeadingStagger =
+  projectsStartStagger + projects.length;
 
-  const approachParagraphStart =
-    approachHeadingStagger + 1;
+const skillsStartStagger =
+  skillsHeadingStagger + 1;
 
-  const skillsHeadingStagger =
-    approachParagraphStart + approachParagraphs.length;
+const approachHeadingStagger =
+  skillsStartStagger + skills.length;
 
-  const skillsStartStagger =
-    skillsHeadingStagger + 1;
+const approachParagraphStart =
+  approachHeadingStagger + 1;
 
-  const contactStagger =
-    skillsStartStagger + skills.length;
+const contactStagger =
+  approachParagraphStart + approachParagraphs.length;
 
-  const quoteStagger = contactStagger + 1;
+const quoteStagger = contactStagger + 1;
 
   return (
     <PageShell>
@@ -121,7 +122,8 @@ const skills = [
         data={[createPersonJsonLd(), createWebsiteJsonLd()]}
       />
 
-      <PageContent>
+      <ProjectSkillHighlightProvider>
+  <PageContent>
         {/* -------------------------------------------------- */}
         {/* Hero */}
         {/* -------------------------------------------------- */}
@@ -189,9 +191,18 @@ const skills = [
         </HomeSection>
 
         {/* -------------------------------------------------- */}
-        {/* Projects */}
+        {/* Projects + Skills */}
         {/* -------------------------------------------------- */}
 
+      <div
+        className="
+          relative
+          lg:grid
+          lg:w-[calc(100%+18.5rem)]
+          lg:grid-cols-[minmax(0,1fr)_16rem]
+          lg:gap-10
+        "
+      >
         <HomeSection
           header={
             <div
@@ -203,13 +214,8 @@ const skills = [
               }
             >
               <SectionHeader
+                actionLabel="View All"
                 actionHref="/projects"
-                actionIntent={{
-                  key: navigationIntentKeys.projectsArchiveBackHref,
-                  type: "set",
-                  value: "/",
-                }}
-                actionLabel="view All"
                 title="projects"
               />
             </div>
@@ -223,6 +229,34 @@ const skills = [
             staggerStart={projectsStartStagger}
           />
         </HomeSection>
+
+        <aside className="mt-12 lg:mt-0">
+          <div className="lg:sticky lg:top-8">
+            <section
+              className="scroll-mt-24 space-y-5"
+              id="skills"
+            >
+              <div
+                className="blur-fade"
+                style={
+                  {
+                    "--stagger": skillsHeadingStagger,
+                  } as CSSProperties
+                }
+              >
+                <h2 className="text-base font-semibold tracking-tight text-foreground">
+                  skills
+                </h2>
+              </div>
+
+              <SkillsList
+                skills={skills}
+                staggerStart={skillsStartStagger}
+              />
+            </section>
+          </div>
+        </aside>
+      </div>
 
         {/* -------------------------------------------------- */}
         {/* My Approach */}
@@ -260,31 +294,6 @@ const skills = [
         </HomeSection>
 
         {/* -------------------------------------------------- */}
-        {/* Skills */}
-        {/* -------------------------------------------------- */}
-
-        <HomeSection
-          header={
-            <div
-              className="blur-fade"
-              style={
-                {
-                  "--stagger": skillsHeadingStagger,
-                } as CSSProperties
-              }
-            >
-              <SectionHeader actionLabel="View All" title="skills" />
-            </div>
-          }
-          id="skills"
-        >
-          <SkillsList
-            skills={skills}
-            staggerStart={skillsStartStagger}
-          />
-        </HomeSection>
-
-        {/* -------------------------------------------------- */}
         {/* Contact */}
         {/* -------------------------------------------------- */}
 
@@ -298,7 +307,8 @@ const skills = [
         >
           <ContactSection email={identity.email} />
         </div>
-      </PageContent>
+        </PageContent>
+</ProjectSkillHighlightProvider>
 
       <HomepageDock
         socialLinks={socialLinks}

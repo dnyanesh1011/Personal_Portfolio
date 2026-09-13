@@ -32,5 +32,6 @@ export function getProjectSummaries(): readonly ProjectContent[] {
     liveHref: project.liveHref,
     sourceHref: project.sourceHref ?? null,
     screenshotSrc: `/assets/projects/${project.slug}/${project.slug}-cover.webp`,
+    stack: project.stack,
   }))
 }

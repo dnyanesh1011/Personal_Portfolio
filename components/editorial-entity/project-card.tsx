@@ -5,12 +5,12 @@ import type * as React from "react";
 import { ProjectActions } from "@/components/action-link/project-actions";
 import { EntitySurface } from "@/components/editorial-entity/entity-surface";
 import { entitySurfaceVariants } from "@/components/editorial-entity/entity-surface-variants";
-import { textStyles } from "@/lib/design/text-styles";
 import { cn } from "@/lib/utils";
 
 export type ProjectCardProps = {
   liveHref: string;
   name: string;
+  variant?: "default" | "featured";
   priority?: boolean;
   screenshotSrc?: string;
   sourceHref: string | null;
@@ -30,6 +30,7 @@ export function ProjectCard({
   surfaceInset = "card",
   surfaceInteraction = "withinFocus",
   summary,
+  variant = "default",
 }: ProjectCardProps): React.ReactElement {
   return (
     <EntitySurface
@@ -38,7 +39,12 @@ export function ProjectCard({
       inset={surfaceInset}
       interaction={surfaceInteraction}
     >
-      <ProjectMediaFrame name={name} priority={priority} src={screenshotSrc} />
+      <ProjectMediaFrame
+        name={name}
+        priority={priority}
+        src={screenshotSrc}
+        variant={variant}
+      />
 
       <div className="mt-3 flex items-start justify-between gap-6">
         <div className="min-w-0">
@@ -67,13 +73,20 @@ function ProjectMediaFrame({
   name,
   priority,
   src,
+  variant,
 }: {
   name: string;
   priority?: boolean;
   src?: string;
+  variant: "default" | "featured";
 }): React.ReactElement {
   return (
-    <div className="group relative aspect-[16/9] overflow-hidden rounded-xl">
+    <div
+      className={cn(
+        "group relative overflow-hidden rounded-xl",
+        variant === "featured" ? "aspect-[16/8]" : "aspect-[16/9]",
+      )}
+    >
       {src ? (
         <SkeletonImage
           alt={`${name} project screenshot`}

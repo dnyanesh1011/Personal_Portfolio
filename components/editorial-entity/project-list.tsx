@@ -2,6 +2,7 @@
 
 import type * as React from "react";
 
+import { useProjectSkillHighlight } from "@/components/homepage/project-skill-highlight-provider";
 import { EntityPrimaryLink } from "@/components/editorial-entity/entity-primary-link";
 import { EditorialEntityList } from "@/components/editorial-entity/editorial-entity-list";
 import { ProjectCard } from "@/components/editorial-entity/project-card";
@@ -32,9 +33,16 @@ export function ProjectList({
   staggerStart = 0,
 }: ProjectListProps): React.ReactElement {
   const projectBackHref = source === "home" ? "/" : "/projects";
+  const { setActiveStack } = useProjectSkillHighlight();
 
   return (
-    <div className="grid sm:grid-cols-2 sm:gap-x-6">
+    <div
+  className={
+    source === "home"
+      ? "grid gap-10"
+      : "grid sm:grid-cols-2 sm:gap-x-6"
+  }
+>
       <EditorialEntityList
         getId={(project) => project.name}
         itemClassName="h-full cursor-pointer"
@@ -50,6 +58,12 @@ export function ProjectList({
           return (
             <div
               className="blur-fade"
+              onPointerEnter={() => {
+                setActiveStack(project.stack);
+              }}
+              onPointerLeave={() => {
+                setActiveStack(null);
+              }}
               style={{
                 "--stagger": staggerStart + projectIndex,
               } as React.CSSProperties}
@@ -104,6 +118,7 @@ function ProjectListRow({
         surfaceInset="none"
         surfaceInteraction="none"
         summary={project.summary}
+        variant={projectBackHref === "/" ? "featured" : "default"}
       />
     </div>
   );
