@@ -13,7 +13,7 @@ export function EntityPrimaryLink({
   return (
     <Link
       aria-label={ariaLabel}
-      className="absolute inset-0 rounded-[inherit] outline-none"
+      className="peer absolute inset-0 rounded-[inherit] outline-none"
       href={href}
       onClick={onClick}
     />

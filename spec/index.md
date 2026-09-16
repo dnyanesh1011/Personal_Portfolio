@@ -1,6 +1,6 @@
 # Dnyanesh Fulsundar Personal Portfolio
 
-This site is Dnyanesh Fulsundar's portfolio and writing surface. It should feel narrow, editorial, text-led, and easy to scan. The job is simple: help visitors understand who Mohamed is, what kind of frontend work he does, what he has written, and where to go next.
+This site is Dnyanesh Fulsundar's portfolio and writing surface. It should feel narrow, editorial, text-led, and easy to scan. The job is simple: help visitors understand who Dnyanesh is, what kind of frontend work he does, what he has written, and where to go next.
 
 The site should not become a theme demo, a maximal archive, or a flashy portfolio that hides the work behind decoration.
 

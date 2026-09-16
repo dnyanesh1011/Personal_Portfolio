@@ -15,8 +15,8 @@ export function FlipAvatar({
         type="button"
         aria-label="flip avatar"
         className={cn(
-          "group relative h-24 w-24 cursor-pointer [perspective:600px]",
-          "blur-fade",
+          "group relative h-24 w-24 cursor-pointer rounded-full outline-none [perspective:600px]",
+          "blur-fade focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
           className,
         )}
         style={style}

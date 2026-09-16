@@ -166,7 +166,7 @@ const quoteStagger = contactStagger + 1;
               }
             >
               <SectionHeader
-                actionLabel="View All"
+                actionLabel="view All"
                 title="about"
               />
             </div>
@@ -176,7 +176,7 @@ const quoteStagger = contactStagger + 1;
           <div className="space-y-3">
             {aboutParagraphs.map((para, index) => (
               <p
-                className="blur-fade text-base font-light leading-7 text-muted-foreground"
+                className="blur-fade text-base font-normal leading-7 text-muted-foreground"
                 key={`about-${index}`}
                 style={
                   {
@@ -214,7 +214,7 @@ const quoteStagger = contactStagger + 1;
               }
             >
               <SectionHeader
-                actionLabel="View All"
+                actionLabel="view All"
                 actionHref="/projects"
                 title="projects"
               />
@@ -279,7 +279,7 @@ const quoteStagger = contactStagger + 1;
           <div className="space-y-4">
             {approachParagraphs.map((para, index) => (
               <p
-                className="blur-fade text-base font-light leading-7 text-muted-foreground"
+                className="blur-fade text-base font-normal leading-7 text-muted-foreground"
                 key={`approach-${index}`}
                 style={
                   {

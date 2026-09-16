@@ -22,14 +22,14 @@
 - Dock excluded from stagger by removing `revealDelayMs` prop; no module-level flag needed
 - Stagger distances and durations tightened across all four tiers (body 14→10px / 0.42→0.38s, surface 12→8px / 0.38→0.34s, header 8→6px, utility 6→4px)
 - `pendingActiveId` `useEffect` replaced with inline derived render value in `animated-icon-link-group.tsx` (per `/react-useeffect` skill)
-- Real social URLs set in `lib/content/identity.ts`: GitHub, LinkedIn, X; email `mohamed.g.shoaib@gmail.com`
+- Real social URLs set in `lib/content/identity.ts`: GitHub, LinkedIn, X; email `Dnyanesh.g.shoaib@gmail.com`
 - `homepageCopy.about`: 3-paragraph real about text (joined `\n\n`, split to `<p>` tags during render)
 - `homepageCopy.approach`: 2-paragraph real approach text (same pattern)
 - `app/page.tsx`: avatar `alt` set to "Dnyanesh Fulsundar"; H1 `<div>` wrapper changed to `<hgroup>`; `projectsHeader` delay corrected to 220ms
 - Homepage H1 and root route title include "Frontend Developer" keyword
 - Root meta description rewritten: React/Next.js/Cairo keywords, ~160 chars
 - `/projects` and `/writing` meta descriptions expanded to ~160 chars with stack keywords
-- OG/Twitter image bindings added to `site-metadata.ts`: `openGraph.images` and `twitter.images` arrays; `twitter.creator` uses `siteConfig.twitterHandle` (`@mohamedgshoaib`)
+- OG/Twitter image bindings added to `site-metadata.ts`: `openGraph.images` and `twitter.images` arrays; `twitter.creator` uses `siteConfig.twitterHandle` (`@Dnyaneshgshoaib`)
 - `siteConfig.twitterHandle` added to `lib/metadata/site-config.ts`
 - `createBreadcrumbJsonLd()` added to `lib/metadata/structured-data.ts`; injected on `app/projects/[slug]/page.tsx` and `app/writing/[slug]/page.tsx`
 - Alt text fixed: avatar `alt="Dnyanesh Fulsundar"`, `ProjectMediaPlaceholder` uses `label` prop, `ProjectCard` `ProjectMediaFrame` uses `"{name} project screenshot"`

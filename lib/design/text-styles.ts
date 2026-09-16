@@ -15,7 +15,7 @@ export const textStyles = {
     "max-w-prose text-base font-medium leading-7 text-pretty text-muted-foreground",
   pageTitle:
     "text-4xl sm:text-5xl font-semibold tracking-tight text-balance text-foreground",
-  sectionTitle: "ttext-lg font-semibold text-balance text-foreground",
+  sectionTitle: "text-lg font-semibold text-balance text-foreground",
   smallDescription:
     "text-sm font-medium leading-6 text-pretty text-muted-foreground",
   tocHeading: "mb-4 text-sm font-medium text-muted-foreground",

@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { IconSquareRoundedFilled } from "@tabler/icons-react"
+import { IconMoon, IconSun } from "@tabler/icons-react"
 import { useSound } from "@web-kits/audio/react"
 import { useTheme } from "@teispace/next-themes"
 
@@ -30,12 +30,7 @@ const dockPillClassName =
 // preventing spurious store.set('payload') calls on every HomepageDock re-render.
 type DockSocialLink = Pick<ActionLinkRecord, "href" | "kind" | "label">
 
-const themeTooltip = (
-  <span className="flex items-center gap-2">
-    <span>Toggle theme</span>
-    <Kbd className="-mr-1">D</Kbd>
-  </span>
-)
+
 
 export function HomepageDock({
   socialLinks,
@@ -53,25 +48,35 @@ export function HomepageDock({
   resolvedThemeRef.current = resolvedTheme
 
   const themeItem = React.useMemo<IconLinkButtonItem>(
-    () => ({
-      icon: IconSquareRoundedFilled,
-      id: "theme-toggle",
-      kind: "button",
-      label: "Toggle theme",
-      onClick: () => {
-        vibrate()
+    () => {
+      const isDark = resolvedTheme === "dark"
+      const label = isDark ? "Switch to light theme" : "Switch to dark theme"
 
-        if (resolvedThemeRef.current === "dark") {
-          playToggleOn()
-          setTheme("light")
-        } else {
-          playToggleOff()
-          setTheme("dark")
-        }
-      },
-      tooltip: themeTooltip,
-    }),
-    [setTheme, playToggleOn, playToggleOff],
+      return {
+        icon: isDark ? IconSun : IconMoon,
+        id: "theme-toggle",
+        kind: "button",
+        label,
+        onClick: () => {
+          vibrate()
+
+          if (resolvedThemeRef.current === "dark") {
+            playToggleOn()
+            setTheme("light")
+          } else {
+            playToggleOff()
+            setTheme("dark")
+          }
+        },
+        tooltip: (
+          <span className="flex items-center gap-2">
+            <span>{label}</span>
+            <Kbd className="-mr-1">D</Kbd>
+          </span>
+        ),
+      }
+    },
+    [resolvedTheme, setTheme, playToggleOn, playToggleOff],
   )
 
   const pill = (

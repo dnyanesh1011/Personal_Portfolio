@@ -94,7 +94,7 @@ function ProjectListRow({
   ...surfaceProps
 }: ProjectListRowProps): React.ReactElement {
   return (
-    <div {...surfaceProps} className={cn(surfaceProps.className, "relative")}>
+    <div {...surfaceProps} className={cn(surfaceProps.className, "group/project relative")}>
       {children}
 
       <EntityPrimaryLink

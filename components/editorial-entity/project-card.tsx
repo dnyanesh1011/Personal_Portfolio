@@ -35,7 +35,7 @@ export function ProjectCard({
   return (
     <EntitySurface
       as="article"
-      className="pointer-events-none relative"
+      className="pointer-events-none relative peer-focus-visible:ring-1 peer-focus-visible:ring-foreground/20"
       inset={surfaceInset}
       interaction={surfaceInteraction}
     >
@@ -46,7 +46,7 @@ export function ProjectCard({
         variant={variant}
       />
 
-      <div className="mt-3 flex items-start justify-between gap-6">
+      <div className="mt-4 flex items-start justify-between gap-4 sm:gap-6">
         <div className="min-w-0">
           <h3 className="text-base font-semibold tracking-tight text-foreground">
             {name}
@@ -90,7 +90,7 @@ function ProjectMediaFrame({
       {src ? (
         <SkeletonImage
           alt={`${name} project screenshot`}
-          className="object-cover transition-transform duration-500 ease-[var(--ease-interface-out)] group-hover:scale-[1.02]"
+          className="object-cover transition-transform duration-500 ease-[var(--ease-interface-out)] group-hover/project:scale-[1.02]"
           fill
           priority={priority}
           sizes="(max-width: 640px) 100vw, 50vw"

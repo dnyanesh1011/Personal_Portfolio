@@ -2,7 +2,7 @@ import type { NextConfig } from "next"
 import { createMDX } from "fumadocs-mdx/next"
 
 const nextConfig: NextConfig = {
-  allowedDevOrigins: ["172.30.225.204", "192.168.1.2"],
+  allowedDevOrigins: ["172.30.225.204", "192.168.1.8"],
 
   images: {
     formats: ["image/webp"],
