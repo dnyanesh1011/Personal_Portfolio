@@ -1,96 +1,179 @@
-![Portfolio banner]()
+<p align="center">
+  <a href="https://dnyaneshfulsundar.com">
+    <img
+      src="./assets/portfolio-preview.gif"
+      alt="Dnyanesh Fulsundar portfolio preview"
+      width="100%"
+    />
+  </a>
+</p>
 
-# Personal Portfolio
+<h1 align="center">Personal Portfolio</h1>
 
-This is my personal portfolio and writing surface: a narrow, editorial site for showing the frontend work I build, the decisions behind it, and the things I am still learning.
+<p align="center">
+  <strong>Frontend developer building React and Next.js products.</strong>
+</p>
 
-I built it to make the important parts easy to find. Visitors can get a quick sense of who I am, browse selected projects, read longer notes about frontend work, and reach me without working through a decorative maze first.
+<p align="center">
+  <a href="https://dnyaneshfulsundar.com">Portfolio</a>
+  ·
+  <a href="https://www.linkedin.com/in/dnyaneshfulsundar/">LinkedIn</a>
+  ·
+  <a href="https://github.com/dnyanesh1011">GitHub</a>
+  ·
+  <a href="https://x.com/dnyanaa">X</a>
+</p>
 
-The site is intentionally quiet. Text carries most of the interface, motion explains state and navigation, and every extra detail has to earn the space it takes.
+---
 
-## At a glance
+## About
 
-|                      |                                                                                            |
-| -------------------- | ------------------------------------------------------------------------------------------ |
-| **Project**          | Dnyanesh Fulsundar’s personal portfolio and writing site                                        |
-| **Primary audience** | People looking at my frontend work and technical writing                                   |
-| **Content**          | Seven project pages and four writing posts, authored in MDX                                |
-| **Current status**   | Active and maintained                                                                      |
-| **Shape**            | Homepage, project archive, project detail pages, writing archive, and writing detail pages |
+This is my personal portfolio and writing site, built around frontend engineering, interface quality, and thoughtful product development.
 
-## Why I built it
+I build frontend systems with React and Next.js, with a focus on architecture, interface quality, performance, and maintainable code.
 
-Most portfolios try to make the work feel impressive before they make it understandable. I wanted this one to do the opposite.
+I enjoy taking products from early ideas to polished, production-ready interfaces, keeping design decisions and engineering quality closely connected throughout the process.
 
-The brief was simple: show who I am, what kind of frontend work I care about, what I have built, what I write about, and where to go next. That meant keeping the content close to the surface, giving projects and writing their own space, and treating the site itself as part of the work rather than a wrapper around it.
-
-## The approach
-
-I designed the site around a few rules:
-
-- communicate intent within a few seconds;
-- keep text as the main interface;
-- use progressive disclosure instead of showing everything at once;
-- keep navigation direct and persistent;
-- fix shared behavior in shared systems instead of layering on page-specific exceptions.
-
-The visual language follows the same direction: a centered content column, short headings, compact project cards, writing rows, subtle dividers, and restrained metadata. Dark mode is meant to feel like a reading surface, not a second personality.
+Based in Maharashtra, India.
 
 ## What I built
 
-### A personal homepage
+### Personal homepage
 
-The homepage brings together identity, selected work, writing, approach, social links, and contact. It is authored through shared content records so the same information can be reused consistently across the site.
+The homepage brings together my identity, selected projects, technical skills, approach to frontend development, writing, social links, and contact information.
 
-### A project archive and detail system
+The content is driven through shared content records so information can be reused consistently across the site.
 
-Projects live in [`content/projects`](./content/projects) as MDX documents. The archive gives each project a compact entry point, while dedicated pages provide room for the starting point, decisions, implementation, and technology behind the work.
+### Project archive and case studies
 
-### A writing surface
+Projects are authored as MDX documents under [`content/projects`](./content/projects).
 
-Writing follows the same MDX-backed model in [`content/writing`](./content/writing). Posts cover frontend patterns, discovery, search visibility, and the practical reasoning that usually gets lost between a bug and its fix.
+The project archive provides a compact overview of my work, while individual project pages provide more context around:
 
-### A discovery and metadata layer
+- the problem and starting point;
+- product and interface decisions;
+- implementation details;
+- technologies used;
+- the reasoning behind the final result.
 
-The site generates route metadata, canonical URLs, JSON-LD, Open Graph images, a sitemap, robots instructions, and a manifest. It also exposes [`llms.txt`](./app/llms.txt/route.ts) and [`llms-full.txt`](./app/llms-full.txt/route.ts) routes that turn the site’s content into a clearer machine-readable reference.
+### Writing surface
 
-### Small interaction systems
+Technical writing lives under [`content/writing`](./content/writing) and follows the same MDX-backed content model.
 
-The floating dock, article chrome, table of contents, page actions, contact copy feedback, theme controls, minimal sounds, and page transitions are all there to support orientation and feedback. They are not meant to compete with the writing.
+The writing focuses on frontend engineering, React patterns, search and AI discovery, implementation decisions, and practical lessons from building software.
 
-## Current status
+### Discovery and metadata
 
-This is an active personal project rather than a frozen case-study artifact. The current repository contains:
+The project includes a dedicated metadata and discovery layer covering:
 
-- seven project MDX files: Dana Doors, Devloop, Forge, Markymap, Mo’s Experiences, Reway, and Rootly;
-- four writing MDX files;
-- project and writing cover images under [`public/assets`](./public/assets);
-- shared content, metadata, motion, audio, article, and navigation systems;
-- local development and validation scripts through pnpm.
+- route metadata;
+- canonical URLs;
+- Open Graph metadata;
+- social preview images;
+- JSON-LD structured data;
+- sitemap generation;
+- robots instructions;
+- web manifest;
+- `llms.txt`;
+- `llms-full.txt`.
+
+This keeps search, social sharing, and machine-readable discovery connected to the same content system.
+
+### Interaction systems
+
+The interface includes a collection of small interaction systems designed around orientation and feedback:
+
+- floating navigation dock;
+- project actions;
+- article navigation;
+- table of contents;
+- theme controls;
+- contact copy feedback;
+- page transitions;
+- subtle audio feedback;
+- project technology highlighting.
+
+The goal is not to add interaction for its own sake, but to make the interface feel responsive without competing with the content.
+
+## Design principles
+
+The project follows a few simple principles:
+
+- **Clarity first** — communicate intent quickly.
+- **Content over decoration** — let the work carry the interface.
+- **Progressive disclosure** — reveal detail when it becomes useful.
+- **Direct navigation** — keep important destinations easy to reach.
+- **Shared systems** — solve recurring problems at the system level rather than through page-specific exceptions.
+- **Restraint** — animation and visual effects should support the interface, not become the interface.
 
 ## Technology
 
-- Next.js 16 App Router
-- React 19
-- TypeScript 5
-- Tailwind CSS 4
-- Fumadocs MDX
-- Motion
-- Base UI via `@base-ui/react`
-- `next-themes`
-- `@web-kits/audio`
-- pnpm
+| Layer | Technology |
+| --- | --- |
+| Framework | Next.js 16 App Router |
+| UI | React 19 |
+| Language | TypeScript 5 |
+| Styling | Tailwind CSS 4 |
+| Content | Fumadocs MDX |
+| Animation | Motion |
+| UI primitives | Base UI |
+| Theme | `next-themes` |
+| Audio | `@web-kits/audio` |
+| Package manager | pnpm |
 
-The important part of the stack is the separation of concerns: [`app`](./app) owns routes, [`components`](./components) owns reusable interface pieces, [`content`](./content) owns authored material, and [`lib`](./lib) owns content loading, metadata, navigation, motion, design tokens, and audio helpers.
+The project separates responsibilities across the codebase:
 
-## Run it locally
+```text
+app/          → routes and application entry points
+components/   → reusable interface systems
+content/      → authored projects and writing
+lib/          → content, metadata, navigation, motion and design systems
+public/       → static application assets
+assets/       → GitHub README assets
+spec/         → product direction and implementation notes
+````
+
+## Project structure
+
+```text
+.
+├── app/
+├── components/
+├── content/
+│   ├── projects/
+│   └── writing/
+├── lib/
+├── public/
+├── assets/
+│   └── portfolio-preview.gif
+├── spec/
+├── package.json
+└── README.md
+```
+
+## Run locally
+
+Clone the repository and install dependencies:
 
 ```bash
 pnpm install
+```
+
+Start the development server:
+
+```bash
 pnpm dev
 ```
 
-Useful checks:
+The application will be available at:
+
+```text
+http://localhost:3000
+```
+
+## Validation
+
+The repository includes formatting, linting, type checking, and production-build checks:
 
 ```bash
 pnpm format:check
@@ -99,8 +182,30 @@ pnpm typecheck
 pnpm build
 ```
 
+## Current project collection
+
+The repository currently contains project pages for:
+
+* Dana Doors
+* Devloop
+* Forge
+* Markymap
+* Mo's Experiences
+* Reway
+* Rootly
+
+It also contains technical writing authored in MDX.
+
 ## Project notes
 
-The project direction and constraints live in [`spec/index.md`](./spec/index.md). Session continuity lives in [`spec/sessions`](./spec/sessions), and the repository’s available agent skills are indexed in [`spec/skills.md`](./spec/skills.md).
+The product direction and implementation constraints are documented in [`spec/index.md`](./spec/index.md).
 
-Those documents are part of how I work on the site: they keep the product direction, writing tone, and implementation decisions close enough to the code that the portfolio can keep changing without losing its shape.
+Session continuity and implementation notes live under [`spec/sessions`](./spec/sessions).
+
+These documents keep product direction, writing tone, and implementation decisions close to the codebase so the portfolio can evolve without losing its underlying structure.
+
+---
+
+<p align="center">
+  Edited by <a href="https://dnyaneshfulsundar.com">Dnyanesh Fulsundar</a>
+</p>
