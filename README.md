@@ -1,7 +1,7 @@
 <p align="center">
   <a href="https://dnyaneshfulsundar.com">
     <img
-      src="./assets/portfolio-preview.gif"
+      src="./public/assets/portfolio-preview.gif"
       alt="Dnyanesh Fulsundar portfolio preview"
       width="100%"
     />
