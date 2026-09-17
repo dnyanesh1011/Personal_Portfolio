@@ -6,7 +6,7 @@ import type {
 export const siteIdentity = {
   name: "Dnyanesh Fulsundar",
   title: "Frontend Developer",
-  email: "wcdnyaneshwar@gmail.com",
+  email: "dnyaneshwarxi@gmail.com",
 } satisfies SiteIdentity
 
 export const socialLinks = [
@@ -27,7 +27,7 @@ export const socialLinks = [
     kind: "cv",
   },
   {
-    href: "mailto:wcdnyaneshwar@gmail.com",
+    href: "mailto:dnyaneshwarxi@gmail.com",
     kind: "email",
   },
 ] satisfies readonly ActionLinkRecord[]

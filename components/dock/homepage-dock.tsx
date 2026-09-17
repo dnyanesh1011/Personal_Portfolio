@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { IconMoon, IconSun } from "@tabler/icons-react"
-import { useSound } from "@web-kits/audio/react"
-import { useTheme } from "@teispace/next-themes"
+import * as React from "react";
+import { IconMoon, IconSun } from "@tabler/icons-react";
+import { useSound } from "@web-kits/audio/react";
+import { useTheme } from "@teispace/next-themes";
 
-import { ActionLinkSet } from "@/components/action-link/action-link-set"
-import { Kbd } from "@/components/ui/kbd"
-import type { IconLinkButtonItem } from "@/components/action-link/icon-link"
-import type { ActionLinkRecord } from "@/lib/content/content-types"
-import { click, toggleOff, toggleOn } from "@/lib/audio/minimal"
-import { vibrate } from "@/lib/haptics"
+import { ActionLinkSet } from "@/components/action-link/action-link-set";
+import { Kbd } from "@/components/ui/kbd";
+import type { IconLinkButtonItem } from "@/components/action-link/icon-link";
+import type { ActionLinkRecord } from "@/lib/content/content-types";
+import { click, toggleOff, toggleOn } from "@/lib/audio/minimal";
+import { vibrate } from "@/lib/haptics";
 
 const navigationItems = [
   {
@@ -21,63 +21,84 @@ const navigationItems = [
     href: "/projects",
     kind: "projects",
   },
-] as const
+] as const;
 
 const dockPillClassName =
-  "pointer-events-auto flex items-center gap-1 rounded-full border border-border/40 bg-surface-floating/85 px-2 py-1 shadow-[var(--shadow-surface-floating)] backdrop-blur-md [&_a]:!flex [&_a]:!size-10 [&_a]:!items-center [&_a]:!justify-center [&_a]:!rounded-full [&_a]:!bg-transparent [&_a:hover]:!bg-foreground/10 [&_a:focus-visible]:!bg-foreground/10 [&_button]:!flex [&_button]:!size-10 [&_button]:!items-center [&_button]:!justify-center [&_button]:!rounded-full [&_button]:!bg-transparent [&_button:hover]:!bg-foreground/10 [&_button:focus-visible]:!bg-foreground/10 [&_svg]:!size-5"
+  "pointer-events-auto flex items-center gap-1 rounded-full border border-border/40 bg-surface-floating/85 px-2 py-1 shadow-[var(--shadow-surface-floating)] backdrop-blur-md [&_a]:!flex [&_a]:!size-10 [&_a]:!items-center [&_a]:!justify-center [&_a]:!rounded-full [&_a]:!bg-transparent [&_a:hover]:!bg-foreground/10 [&_a:focus-visible]:!bg-foreground/10 [&_button]:!flex [&_button]:!size-10 [&_button]:!items-center [&_button]:!justify-center [&_button]:!rounded-full [&_button]:!bg-transparent [&_button:hover]:!bg-foreground/10 [&_button:focus-visible]:!bg-foreground/10 [&_svg]:!size-5";
 
-// Static — hoisted so tooltip payload reference never changes between renders,
-// preventing spurious store.set('payload') calls on every HomepageDock re-render.
-type DockSocialLink = Pick<ActionLinkRecord, "href" | "kind" | "label">
-
-
+type DockSocialLink = Pick<ActionLinkRecord, "href" | "kind" | "label">;
 
 export function HomepageDock({
   socialLinks,
 }: {
-  socialLinks: readonly DockSocialLink[]
+  socialLinks: readonly DockSocialLink[];
 }): React.ReactElement {
-  const { resolvedTheme, setTheme } = useTheme()
-  const playClick = useSound(click)
-  const playToggleOn = useSound(toggleOn)
-  const playToggleOff = useSound(toggleOff)
+  const { resolvedTheme, setTheme } = useTheme();
 
-  // Ref so the click handler always reads the current theme without being listed
-  // as a useMemo dependency — keeps themeItem stable across theme-change re-renders.
-  const resolvedThemeRef = React.useRef(resolvedTheme)
-  resolvedThemeRef.current = resolvedTheme
+  const playClick = useSound(click);
+  const playToggleOn = useSound(toggleOn);
+  const playToggleOff = useSound(toggleOff);
+
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const resolvedThemeRef = React.useRef(resolvedTheme);
+  resolvedThemeRef.current = resolvedTheme;
 
   const themeItem = React.useMemo<IconLinkButtonItem>(
     () => {
-      const isDark = resolvedTheme === "dark"
-      const label = isDark ? "Switch to light theme" : "Switch to dark theme"
+      /*
+       * During SSR and the first client render we intentionally use
+       * the same deterministic fallback.
+       *
+       * Once mounted, the real resolvedTheme is used.
+       */
+      const isDark = mounted
+        ? resolvedTheme === "dark"
+        : true;
+
+      const label = isDark
+        ? "Switch to light theme"
+        : "Switch to dark theme";
 
       return {
         icon: isDark ? IconSun : IconMoon,
         id: "theme-toggle",
         kind: "button",
+
         label,
+
         onClick: () => {
-          vibrate()
+          vibrate();
 
           if (resolvedThemeRef.current === "dark") {
-            playToggleOn()
-            setTheme("light")
+            playToggleOn();
+            setTheme("light");
           } else {
-            playToggleOff()
-            setTheme("dark")
+            playToggleOff();
+            setTheme("dark");
           }
         },
+
         tooltip: (
           <span className="flex items-center gap-2">
             <span>{label}</span>
             <Kbd className="-mr-1">D</Kbd>
           </span>
         ),
-      }
+      };
     },
-    [resolvedTheme, setTheme, playToggleOn, playToggleOff],
-  )
+    [
+      mounted,
+      resolvedTheme,
+      setTheme,
+      playToggleOn,
+      playToggleOff,
+    ],
+  );
 
   const pill = (
     <ActionLinkSet
@@ -91,12 +112,12 @@ export function HomepageDock({
         themeItem,
       ]}
       onItemClick={() => {
-  vibrate()
-  playClick()
-}}
+        vibrate();
+        playClick();
+      }}
       variant="dock"
     />
-  )
+  );
 
   return (
     <>
@@ -121,8 +142,7 @@ export function HomepageDock({
         <div className="absolute inset-0 backdrop-blur-[12px] [mask:linear-gradient(to_bottom,transparent_87.5%,black_100%)]" />
       </div>
 
-      {/* Mobile fallback (pointer:coarse): gradient fade — zero GPU compositing
-          cost, same semantic signal as the blur zone. */}
+      {/* Mobile fallback (pointer:coarse): gradient fade */}
       <div
         aria-hidden="true"
         className="pointer-events-auto fixed inset-x-0 bottom-0 z-[39] h-20 bg-gradient-to-t from-background to-transparent sm:h-[4.75rem] [@media(pointer:fine)]:hidden"
@@ -135,5 +155,5 @@ export function HomepageDock({
         {pill}
       </nav>
     </>
-  )
+  );
 }

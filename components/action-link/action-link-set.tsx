@@ -114,52 +114,6 @@ export function ActionLinkSet({
       return item
     }
 
-    if (item.kind === "email") {
-      const email = item.href.replace("mailto:", "")
-      const label = emailCopied ? "Email copied" : (item.label ?? "Copy email")
-      return {
-        icon: EmailIcon,
-        id: "email",
-        kind: "button" as const,
-        label,
-        onClick: () => {
-          playCopy()
-
-          const copyEmail = async () => {
-            try {
-              if (navigator.clipboard?.writeText) {
-                await navigator.clipboard.writeText(email)
-                vibrate()
-                setEmailCopied(true)
-                return
-              }
-            } catch {
-              // Fall through to the legacy clipboard fallback.
-            }
-
-            const textarea = document.createElement("textarea")
-            textarea.value = email
-            textarea.setAttribute("readonly", "")
-            textarea.style.position = "fixed"
-            textarea.style.opacity = "0"
-            document.body.appendChild(textarea)
-            textarea.select()
-
-            try {
-              if (document.execCommand("copy")) {
-              vibrate()
-              setEmailCopied(true)
-            }
-            } finally {
-              document.body.removeChild(textarea)
-            }
-          }
-
-          void copyEmail()
-        },
-        tooltip: label,
-      }
-    }
 
     const resolvedItem = resolveActionLinkItem(item)
 
