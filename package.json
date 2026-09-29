@@ -21,6 +21,7 @@
     "@tabler/icons-react": "3.44.0",
     "@teispace/next-themes": "^2.0.4",
     "@types/mdx": "^2.0.14",
+    "@upstash/redis": "^1.39.0",
     "@web-kits/audio": "^0.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
