@@ -6,6 +6,7 @@ import { HomepageDock } from "@/components/dock/homepage-dock";
 import { HomepageFooter } from "@/components/homepage/homepage-footer";
 import { ProjectSkillHighlightProvider } from "@/components/homepage/project-skill-highlight-provider";
 import { SkillsList } from "@/components/homepage/skills-list";
+import { ActivityDisplay } from "@/components/activity/activity-display";
 import {
   HomeSection,
   PageContent,
@@ -136,6 +137,7 @@ const quoteStagger = contactStagger + 1;
             >
               {identity.name}
             </h1>
+            <ActivityDisplay />
 
             <p
               className="blur-fade text-base font-light leading-7 text-muted-foreground"
